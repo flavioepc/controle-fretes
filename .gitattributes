@@ -1,0 +1,4 @@
+# scripts do servidor Linux precisam de quebra de linha LF; os .bat do Windows, CRLF
+*.sh   text eol=lf
+*.conf text eol=lf
+*.bat  text eol=crlf

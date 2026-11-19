@@ -1,0 +1,85 @@
+/* Relatórios para imprimir (layouts/impressao.php). Sempre claro, A4 retrato. */
+@page { size: A4 portrait; margin: 12mm 12mm 14mm; }
+
+body.impressao { background: #e9ecef; color: #212529; font-size: 10pt; }
+
+/* barra de opções (some na impressão) */
+.barra-impressao { position: sticky; top: 0; z-index: 10; background: #fff; border-bottom: 1px solid #dee2e6;
+  padding: .6rem 1rem; display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: end; }
+.barra-impressao .form-label { font-size: .75rem; margin-bottom: .15rem; color: #6c757d; }
+
+/* dados do boleto de cada fatura, logo acima da folha dela */
+.barra-fatura { width: 210mm; max-width: 100%; margin: 1.25rem auto -.6rem; display: flex; flex-wrap: wrap;
+  align-items: end; gap: .4rem 1rem; font-size: .8rem; }
+.barra-fatura label { display: flex; flex-direction: column; color: #6c757d; font-size: .72rem; }
+.barra-fatura .in-boleto { width: 8.5rem; }
+.barra-fatura .selo-tela { font-size: .75rem; padding-bottom: .3rem; }
+.barra-fatura .ja-impressa { font-size: .75rem; color: #6c757d; padding-bottom: .35rem; }
+.barra-fatura .ja-impressa.sim { color: #997404; font-weight: 600; }
+
+/* a "folha" na tela */
+.folha { background: #fff; width: 210mm; max-width: 100%; min-height: 297mm; margin: 1rem auto; padding: 12mm;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .12); }
+.folha-meia { min-height: 0; }
+
+.rel-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+  border-bottom: 2px solid #212529; padding-bottom: .35rem; margin-bottom: .6rem; }
+.rel-marca { font-size: 13pt; font-weight: 700; letter-spacing: .02em; }
+.rel-titulo { font-size: 11pt; font-weight: 600; }
+.rel-sub { font-size: 8pt; color: #555; text-align: right; }
+
+.rel-dados { display: grid; grid-template-columns: repeat(4, 1fr); gap: .25rem .75rem; margin-bottom: .6rem;
+  border: 1px solid #adb5bd; padding: .35rem .5rem; }
+.rel-dados .rot { font-size: 7.5pt; color: #555; text-transform: uppercase; letter-spacing: .03em; }
+.rel-dados .val { font-weight: 600; }
+
+table.rel { width: 100%; border-collapse: collapse; font-size: 9pt; }
+table.rel th { background: #f1f3f5; font-size: 7.5pt; text-transform: uppercase; letter-spacing: .03em;
+  border-bottom: 1px solid #212529; padding: .2rem .3rem; text-align: left; }
+table.rel td { border-bottom: 1px solid #dee2e6; padding: .15rem .3rem; vertical-align: top; }
+table.rel .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.rel tfoot td { border-top: 1px solid #212529; border-bottom: 0; font-weight: 700; }
+table.rel tr.subtotal td { background: #f8f9fa; font-weight: 600; border-bottom: 1px solid #adb5bd; }
+table.rel tr.grupo td { font-weight: 700; padding-top: .45rem; border-bottom: 1px solid #212529; }
+.rel-nota { font-size: 7.5pt; color: #555; }
+
+.rel-totais { margin: .7rem 0 0 auto; width: 9.5cm; border: 1px solid #212529; font-size: 10pt; }
+.rel-totais div { display: flex; justify-content: space-between; padding: .2rem .5rem; border-bottom: 1px solid #dee2e6; }
+.rel-totais div:last-child { border-bottom: 0; }
+.rel-totais .num { font-variant-numeric: tabular-nums; font-weight: 600; }
+.rel-totais .destaque { background: #f1f3f5; font-weight: 700; }
+
+.selo { display: inline-block; border: 2px solid; padding: .05rem .5rem; font-weight: 700; letter-spacing: .05em; }
+.selo-ok { color: #146c43; }
+.selo-erro { color: #b02a37; }
+.selo-pendente { color: #6c757d; border-style: dashed; }
+
+.rel-assinaturas { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.2rem; font-size: 8.5pt; }
+.rel-assinaturas div { border-top: 1px solid #212529; padding-top: .2rem; text-align: center; }
+
+.rel-rodape { margin-top: 1rem; font-size: 7.5pt; color: #6c757d; display: flex; justify-content: space-between; }
+
+/* protocolo: duas vias na mesma folha, com linha de corte */
+.via { padding: 0 0 .5rem; }
+.via + .via { border-top: 1px dashed #6c757d; margin-top: .8rem; padding-top: 1rem; position: relative; }
+.via + .via::before { content: "✂  recorte aqui"; position: absolute; top: -.6rem; left: 50%; transform: translateX(-50%);
+  background: #fff; padding: 0 .5rem; font-size: 7.5pt; color: #6c757d; }
+.via-nome { display: inline-block; margin-bottom: .15rem; font-size: 8pt; font-weight: 700; color: #212529;
+  border: 1px solid #212529; padding: 0 .4rem; }
+.lista-nf { font-size: 8.5pt; line-height: 1.35; columns: 4; column-gap: 1rem; border: 1px solid #dee2e6; padding: .3rem .5rem; }
+.lista-nf span { display: block; break-inside: avoid; }
+
+@media print {
+  body.impressao { background: #fff; }
+  .nao-imprimir { display: none !important; }
+  .folha { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  .bloco-fatura + .bloco-fatura { break-before: page; }      /* cada fatura começa numa folha nova */
+  table.rel thead { display: table-header-group; }
+  table.rel tr { break-inside: avoid; }
+  .rel-totais, .rel-assinaturas { break-inside: avoid; }
+}
+@media (max-width: 600px) {
+  .folha { padding: 5mm; }
+  .rel-dados { grid-template-columns: repeat(2, 1fr); }
+  .lista-nf { columns: 2; }
+}

@@ -1,0 +1,8 @@
+config/config.local.php
+*.xlsx
+# backups e exportações têm dados reais (fretes, saldos, usuários): nunca vão para o Git
+database/backup_*.sql
+database/dados_producao_*.sql
+
+# lista de pendências da importação (nomes de vendedores/gestores)
+database/*.csv

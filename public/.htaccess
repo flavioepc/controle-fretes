@@ -1,0 +1,6 @@
+Options -Indexes
+RewriteEngine On
+# arquivos reais (css, js, imagens) são servidos direto; o resto vai para o index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

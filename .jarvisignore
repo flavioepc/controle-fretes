@@ -1,0 +1,3 @@
+# Carga de dados da planilha: só dados, atrapalha a busca do Jarvis
+database/04_carga_planilha.sql
+public/assets/vendor/*

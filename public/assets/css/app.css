@@ -1,0 +1,199 @@
+/* =====================================================================
+   Intranet Fabreck — estilos sobre o Bootstrap 5.3
+   Cores dos gráficos validadas para daltonismo (claro e escuro).
+   ===================================================================== */
+:root {
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --app-plano: #f4f5f7;
+  --app-superficie: #ffffff;
+  --app-borda: rgba(11, 11, 11, .08);
+  --app-menu-largura: 248px;
+
+  /* dados */
+  --serie-1: #2a78d6;     /* cliente / positivo */
+  --serie-2: #eb6834;     /* transportadora */
+  --negativo: #e34948;
+  --texto-positivo: #1c5cab;
+  --texto-negativo: #b42d2d;
+  --grade: #e1e0d9;
+  --eixo: #898781;
+  --status-critico: #d03b3b;
+  --status-alerta: #c98500;
+}
+[data-bs-theme="dark"] {
+  --app-plano: #111211;
+  --app-superficie: #1a1a19;
+  --app-borda: rgba(255, 255, 255, .09);
+  --bs-body-bg: #111211;
+  --bs-tertiary-bg: #1a1a19;
+  --serie-1: #3987e5;
+  --serie-2: #d95926;
+  --negativo: #e66767;
+  --texto-positivo: #6da7ec;
+  --texto-negativo: #ef8a8a;
+  --grade: #2c2c2a;
+  --eixo: #898781;
+  --status-critico: #e66767;
+  --status-alerta: #fab219;
+}
+
+body.app { background: var(--app-plano); }
+.card { background: var(--app-superficie); border-color: var(--app-borda); }
+
+/* ---------- topo e menu ---------- */
+.app-topo { background: var(--app-superficie); min-height: 56px; z-index: 1030; }
+.marca-icone {
+  display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 8px;
+  background: var(--bs-primary); color: #fff; font-size: .9rem;
+}
+.marca-icone-lg { width: 52px; height: 52px; border-radius: 14px; font-size: 1.4rem; }
+.avatar {
+  display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--bs-primary-bg-subtle); color: var(--bs-primary-text-emphasis);
+  font-size: .75rem; font-weight: 600; flex: none;
+}
+.avatar-sm { width: 28px; height: 28px; font-size: .68rem; }
+
+.app-corpo { display: flex; min-height: calc(100vh - 56px); }
+.app-conteudo { flex: 1; min-width: 0; padding: 1.25rem 1rem 2.5rem; }
+@media (min-width: 768px) { .app-conteudo { padding: 1.5rem 1.75rem 3rem; } }
+
+.app-menu .nav-link {
+  display: flex; align-items: center; gap: .65rem; color: var(--bs-body-color);
+  padding: .55rem .75rem; border-radius: .5rem; font-size: .925rem;
+}
+.app-menu .nav-link:hover:not(.disabled):not(.active) { background: var(--bs-tertiary-bg); }
+.app-menu .nav-link.disabled { color: var(--bs-secondary-color); opacity: .75; }
+.app-menu .nav-link .badge { font-size: .62rem; }
+@media (min-width: 992px) {
+  .app-menu {
+    width: var(--app-menu-largura); flex: none; background: var(--app-superficie);
+    position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto;
+  }
+}
+
+/* ---------- login ---------- */
+.tela-auth { min-height: 100vh; display: grid; place-items: center; background: var(--app-plano); padding: 1rem; }
+.tela-auth-caixa { width: 100%; max-width: 400px; }
+.tela-auth .marca-icone { display: inline-grid; }
+
+/* ---------- portal ---------- */
+.cartao-sistema { transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease; }
+.cartao-sistema:hover { transform: translateY(-2px); box-shadow: 0 .5rem 1.25rem rgba(0, 0, 0, .07); border-color: var(--bs-primary); }
+.cartao-sistema-icone {
+  display: grid; place-items: center; width: 44px; height: 44px; flex: none; border-radius: 12px;
+  background: var(--bs-primary-bg-subtle); color: var(--bs-primary-text-emphasis); font-size: 1.25rem;
+}
+.border-dashed { border-style: dashed !important; }
+
+/* ---------- dashboard ---------- */
+.titulo-secao {
+  font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--bs-secondary-color); margin: 0 0 .6rem;
+}
+.titulo-secao span { text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: .35rem; }
+
+.card-indicador .card-body { padding: .9rem 1rem; }
+.indicador-rotulo { font-size: .78rem; color: var(--bs-secondary-color); display: flex; gap: .4rem; align-items: center; }
+.indicador-valor { font-size: 1.35rem; font-weight: 600; margin-top: .25rem; line-height: 1.2; word-break: break-word; }
+.indicador-nota { font-size: .74rem; color: var(--bs-secondary-color); margin-top: .2rem; }
+@media (min-width: 1200px) { .indicador-valor { font-size: 1.55rem; } }
+@media (max-width: 400px) { .indicador-valor { font-size: 1.1rem; } }
+.card-destaque { border-color: var(--bs-primary-border-subtle); }
+
+.valor-positivo { color: var(--texto-positivo); }
+.valor-negativo { color: var(--texto-negativo); }
+.numero, .tabela-numeros td { font-variant-numeric: tabular-nums; }
+
+.status-critico { color: var(--status-critico); }
+.status-critico-texto { color: var(--texto-negativo); }
+.status-alerta { color: var(--status-alerta); }
+.status-linha { font-size: .85rem; display: flex; gap: .4rem; align-items: center; }
+
+.pill-pendencia {
+  display: inline-flex; align-items: center; gap: .4rem; font-size: .8rem; padding: .35rem .7rem;
+  border-radius: 999px; background: var(--bs-warning-bg-subtle); color: var(--bs-warning-text-emphasis);
+  border: 1px solid var(--bs-warning-border-subtle);
+}
+
+.grafico-area { position: relative; height: 280px; }
+.legenda { display: flex; flex-wrap: wrap; gap: .25rem .9rem; font-size: .75rem; color: var(--bs-secondary-color); }
+.legenda li { display: flex; align-items: center; gap: .35rem; }
+.legenda-linha { width: 16px; height: 2px; border-radius: 2px; display: inline-block; }
+.legenda-linha.s1 { background: var(--serie-1); }
+.legenda-linha.s2 { background: var(--serie-2); }
+.chave-sinal { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: .3rem; vertical-align: -1px; }
+.chave-sinal.positivo { background: var(--serie-1); }
+.chave-sinal.negativo { background: var(--negativo); }
+
+.vazio { display: flex; flex-direction: column; align-items: center; gap: .4rem; padding: 2.5rem 1rem;
+  color: var(--bs-secondary-color); font-size: .875rem; }
+.vazio .bi { font-size: 1.6rem; opacity: .6; }
+.min-w-0 { min-width: 0; }
+.lista-ranking .list-group-item { background: transparent; padding: .55rem 1rem; }
+.barra-filtros { background: var(--app-superficie); }
+
+/* Tabela que vira cartões empilhados no celular */
+@media (max-width: 575.98px) {
+  .tabela-cards thead { display: none; }
+  .tabela-cards, .tabela-cards tbody, .tabela-cards tr, .tabela-cards td { display: block; width: 100%; }
+  .tabela-cards tr { padding: .6rem 1rem; border-bottom: 1px solid var(--app-borda); }
+  .tabela-cards td { border: 0; padding: .15rem 0; display: flex; justify-content: space-between; gap: 1rem; text-align: right !important; }
+  .tabela-cards td::before { content: attr(data-rotulo); color: var(--bs-secondary-color); font-size: .78rem; text-align: left; }
+  .tabela-cards td:first-child { display: block; text-align: left !important; }
+  .tabela-cards td:first-child::before { content: none; }
+}
+.tabela-cards > :not(caption) > * > * { background: transparent; }
+.tabela-cards th { font-size: .75rem; font-weight: 500; color: var(--bs-secondary-color); }
+@media (min-width: 576px) { .tabela-cards td:first-child, .tabela-cards th:first-child { padding-left: 1rem; } }
+@media (min-width: 576px) { .tabela-cards td:last-child, .tabela-cards th:last-child { padding-right: 1rem; } }
+
+@media (forced-colors: active) {
+  .legenda-linha, .chave-sinal { forced-color-adjust: none; }
+}
+
+/* ---------- formulário de frete ---------- */
+.resultado-diferenca {
+  border-radius: .5rem; padding: .75rem 1rem; background: var(--bs-tertiary-bg);
+  border: 1px solid var(--app-borda); display: flex; flex-direction: column; justify-content: center;
+}
+.resultado-diferenca.positivo { border-color: var(--serie-1); }
+.resultado-diferenca.positivo #diferenca, .resultado-diferenca.positivo #diferencaTexto { color: var(--texto-positivo); }
+.resultado-diferenca.negativo { border-color: var(--negativo); }
+.resultado-diferenca.negativo #diferenca, .resultado-diferenca.negativo #diferencaTexto { color: var(--texto-negativo); }
+.barra-acoes {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; padding: .75rem 0 1rem;
+  position: sticky; bottom: 0; background: linear-gradient(to top, var(--app-plano) 75%, transparent); z-index: 5;
+}
+@media (max-width: 575.98px) { .barra-acoes { position: static; background: none; } .barra-acoes > a { order: 2; width: 100%; } }
+.tabela-fretes .acoes .btn { padding: .15rem .45rem; }
+@media (max-width: 575.98px) {
+  .tabela-fretes td.acoes { justify-content: flex-end; gap: .4rem; padding-top: .4rem; }
+  .tabela-fretes td.acoes::before { content: none; }
+}
+
+/* Tom Select no tema escuro e com erro */
+[data-bs-theme="dark"] .ts-dropdown, [data-bs-theme="dark"] .ts-control,
+[data-bs-theme="dark"] .ts-control input { background: var(--bs-body-bg); color: var(--bs-body-color); }
+[data-bs-theme="dark"] .ts-dropdown .active { background: var(--bs-tertiary-bg); color: var(--bs-body-color); }
+[data-bs-theme="dark"] .ts-dropdown .optgroup-header { background: var(--bs-body-bg); color: var(--bs-secondary-color); }
+.ts-wrapper.is-invalid .ts-control { border-color: var(--bs-form-invalid-border-color); }
+.ts-dropdown .optgroup-header { font-size: .72rem; text-transform: uppercase; letter-spacing: .03em; }
+
+/* cor de positivo/negativo também dentro de tabelas do Bootstrap */
+.valor-positivo { --bs-table-color: var(--texto-positivo); }
+.valor-negativo { --bs-table-color: var(--texto-negativo); }
+
+/* Tom Select na mesma altura dos outros campos */
+.ts-wrapper.form-select-sm .ts-control { padding: .25rem 2rem .25rem .5rem; min-height: calc(1.5em + .5rem + 2px); font-size: .875rem; }
+.ts-wrapper.form-select .ts-control, .ts-wrapper.single .ts-control { box-shadow: none; }
+
+/* ---------- uso de crédito ---------- */
+.cartao-pedido.pendente { border-left: 3px solid var(--status-alerta); }
+.lista-pedido { background: transparent; padding: .75rem 1rem; }
+.abas-status { display: flex; flex-wrap: wrap; gap: .3rem; }
+@media (max-width: 575.98px) {
+  .abas-status { flex-wrap: nowrap; overflow-x: auto; width: 100%; padding-bottom: .25rem; }
+  .abas-status .btn { white-space: nowrap; }
+}
+.btn-group .btn-check:checked + .btn { font-weight: 500; }
